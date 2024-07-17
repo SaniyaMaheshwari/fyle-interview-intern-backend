@@ -1,0 +1,13 @@
+version: '1.0'
+
+services:
+  web:
+    build: .
+    container_name: school_system
+    ports:
+      - "7755:7755"
+    environment:
+      - FLASK_APP=core/server.py
+    volumes:
+      - .:/app
+    command: ["bash", "run.sh"]

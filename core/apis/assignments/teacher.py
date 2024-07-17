@@ -28,8 +28,8 @@ def grade_assignment(p, incoming_payload):
     assignment = Assignment.get_by_id(grade_assignment_payload.id)
 
     assertions.assert_found(assignment, 'this assignment does not exist')
-    assertions.assert_valid(assignment.teacher_id == p.user_id , 'this assignment was not submitted to this teacher')
-    assertions.assert_valid(assignment.state == AssignmentStateEnum.SUBMITTED , 'this assignment was not submitted to this teacher')
+    assertions.assert_valid(assignment.teacher_id == p.teacher_id , 'this assignment was not submitted to this teacher')
+    assertions.assert_valid(assignment.state == AssignmentStateEnum.SUBMITTED , 'only a submitted assignment can be graded')
 
     graded_assignment = Assignment.mark_grade(
         _id=grade_assignment_payload.id,
